@@ -1,2 +1,4 @@
-# controlaccesos_arduino
-Control de accesos RFID con Arduino y NodeJS
+# Control de accesos con Arduino
+Control de accesos usando un lector RFID, NodeJS y MongoDB.
+
+Víctor Moreno.
