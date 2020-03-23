@@ -16,9 +16,8 @@ port.on("open", () => {
 });
 parser.on('data', data => {
 if(autorizados.indexOf(parseInt(data)) !== -1){
-    console.log("aut");
+    console.log("Autorizado. Tu id es: " + data);
 } else {
-    console.log("no aut");
-    
+    console.log("No autorizado. Tu id es: " + data);    
 }
 });
