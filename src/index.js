@@ -1,4 +1,7 @@
 const app=require('./app');
+const UID = require('./models/UID');
+const path = require('path');
+
 const mongoose=require('mongoose');
 const SerialPort = require('serialport');
 const Readline = require('@serialport/parser-readline');
@@ -26,7 +29,20 @@ mongoose.connect('mongodb://localhost:27017/controlaccesos', {
 var autorizados = [15683, 214];
 //create a server object:
 parser.on('data', data => {
-data = outputconsole;
+    console.log(parseInt(data));
+    uidlog = parseInt(data);
+    UID.findOne({uid: uidlog}, (err, uidlog) => {
+        if (err) {
+            console.log(err);
+        } else {
+            if (!uidlog) {
+                console.log("");
+                ;
+            } else {
+                console.log("uidExists");
+            }
+        }
+    });
 /*
 if(autorizados.indexOf(parseInt(data)) !== -1){
     console.log("Autorizado. Tu id es: " + data);

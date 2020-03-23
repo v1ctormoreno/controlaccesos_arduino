@@ -35,6 +35,15 @@ app.get('/get/uid/:uid', (req, res)=>{
         } 
     })
 });
-
+app.get('/see/uid', (req, res) => {
+    let query = {uid: /^S/};
+    UID.find({}, (err, foundUID)=>{
+        if(err){
+            console.log(err);
+        } else {
+            res.send(foundUID);
+        }
+    });
+});
 
 module.exports=app;
