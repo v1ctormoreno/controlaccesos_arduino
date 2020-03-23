@@ -22,5 +22,19 @@ app.post('/new/uid', (req, res)=>{
         }
     });
 });
+app.get('/get/uid/:uid', (req, res)=>{
+    UID.findOne({uid: req.params.uid}, (err, uidStored)=>{
+        if(err){
+            res.send('Error:' +err);
+        } else{
+            if(!uidStored){
+                res.send("Este ID no existe");
+            } else {
+                res.send(uidStored);
+            }
+        } 
+    })
+});
+
 
 module.exports=app;

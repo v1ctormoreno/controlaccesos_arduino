@@ -26,9 +26,11 @@ mongoose.connect('mongodb://localhost:27017/controlaccesos', {
 var autorizados = [15683, 214];
 //create a server object:
 parser.on('data', data => {
+data = outputconsole;
+/*
 if(autorizados.indexOf(parseInt(data)) !== -1){
     console.log("Autorizado. Tu id es: " + data);
 } else {
     console.log("No autorizado. Tu id es: " + data);    
-}
+}*/
 });
