@@ -29,17 +29,16 @@ mongoose.connect('mongodb://localhost:27017/controlaccesos', {
 var autorizados = [15683, 214];
 //create a server object:
 parser.on('data', data => {
-    console.log(parseInt(data));
     uidlog = parseInt(data);
     UID.findOne({uid: uidlog}, (err, uidlog) => {
         if (err) {
             console.log(err);
         } else {
             if (!uidlog) {
-                console.log("");
+                console.log("El UID " + parseInt(data) + " no existe.");
                 ;
             } else {
-                console.log("uidExists");
+                console.log("El UID " + parseInt(data) + " existe.");
             }
         }
     });
