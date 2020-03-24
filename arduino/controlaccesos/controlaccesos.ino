@@ -4,12 +4,18 @@
 #define RST_PIN 9 // Configurable, see typical pin layout above
 #define SS_PIN 10 // Configurable, see typical pin layout above
 
+int incomingByte = 0;
+bool comprobar_tarjeta;
+
 MFRC522 mfrc522(SS_PIN, RST_PIN); // Create MFRC522 instance
 
 MFRC522::MIFARE_Key key;
 
 void setup()
 {
+  pinMode(2, OUTPUT);
+  pinMode(3, OUTPUT);
+  comprobar_tarjeta=true;
   Serial.begin(9600); // Initialize serial communications with the PC
   while (!Serial)
     ;                 // Do nothing if no serial port is opened (added for Arduinos based on ATMEGA32U4)
@@ -35,9 +41,12 @@ unsigned long getID()
 }
 void loop()
 {
-  if (mfrc522.PICC_IsNewCardPresent())
+  digitalWrite(2, LOW);
+  digitalWrite(3, LOW);
+  if (mfrc522.PICC_IsNewCardPresent() && comprobar_tarjeta)
   {
     unsigned long uid = getID();
+    comprobar_tarjeta = false;
     if (uid != -1)
     {
       Serial.println(uid);
@@ -45,5 +54,22 @@ void loop()
       int arraySize = sizeof(authorized) / sizeof(int);
       boolean found = false;
     }
+  }
+  if (Serial.available() > 0 && !comprobar_tarjeta)
+  {
+    // read the incoming byte:
+    incomingByte = Serial.read();
+    incomingByte = incomingByte-48;
+    // say what you got:
+    if(incomingByte){
+      digitalWrite(2, HIGH);
+      delay(3000);
+      digitalWrite(2, LOW);
+    } else {
+      digitalWrite(3, HIGH);
+      delay(3000);
+      digitalWrite(3, LOW);
+    }
+    comprobar_tarjeta=true;
   }
 }

@@ -1,0 +1,19 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">UID</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido</th>
+        </tr>
+    </thead>
+    <tbody>
+     {{#each uids}}  
+     {{this}} 
+        <tr>
+            <th scope="row">UID</th>
+            <td>{{name}}</td>
+            <td>{{this.lastname}}</td>
+        </tr>
+        {{/each}}
+    </tbody>
+</table>

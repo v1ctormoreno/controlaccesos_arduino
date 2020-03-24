@@ -12,6 +12,7 @@ const PORT=process.env.PORT || 3000;
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);
 
+
 mongoose.connect('mongodb://localhost:27017/controlaccesos', {
        useNewUrlParser: true,
     useUnifiedTopology: true  
@@ -29,16 +30,19 @@ mongoose.connect('mongodb://localhost:27017/controlaccesos', {
 var autorizados = [15683, 214];
 //create a server object:
 parser.on('data', data => {
+    console.log(data);
+    
     uidlog = parseInt(data);
-    UID.findOne({uid: uidlog}, (err, uidlog) => {
+    UID.findOne({uid: uidlog}, (err, uidStored) => {
         if (err) {
             console.log(err);
         } else {
-            if (!uidlog) {
+            if (!uidStored) {
                 console.log("El UID " + parseInt(data) + " no existe.");
-                ;
+                port.write('0');
             } else {
                 console.log("El UID " + parseInt(data) + " existe.");
+                port.write('1');
             }
         }
     });
