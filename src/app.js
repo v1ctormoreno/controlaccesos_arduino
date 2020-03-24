@@ -5,8 +5,8 @@ const exphbs=require('express-handlebars');
 const UID=require('./models/UID');
 const app=express();
 
-app.use(express.urlencoded({extended: false}));
-app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+
 
 app.set('views', path.join(__dirname, 'views'));
 app.engine('.hbs', exphbs({
@@ -27,7 +27,7 @@ app.post('/new/uid', (req, res)=>{
         if(err){
             res.send('Error: '+err);
         } else{
-            res.send(uidStored);
+            res.redirect('/see/uid');
         }
     });
 });
@@ -44,11 +44,31 @@ app.get('/get/uid/:uid', (req, res)=>{
         } 
     })
 });
-app.get('/see/uid', async(req, res) => {
-    const uids=await UID.find();
-    console.log(uids);
-    
-    res.render('pages/seeUID', {uids})
+app.get('/see/uid', (req, res) => {
+    UID.find({}, (err, uidStored) => {
+        if(err){
+            res.send('Error interno DB');
+        } else {
+            console.log(uidStored);
+            let finalUIDs = [];
+            uidStored.forEach((uidElement) => {
+                finalUIDs.push(JSON.parse(JSON.stringify(uidElement)));
+            });
+            console.log(finalUIDs);
+            res.render('pages/seeUID', { uids: finalUIDs });
+            
+        }
+    })
 });
+
+app.get('/delete/:uid', (req, res)=> {
+    UID.deleteOne({uid: req.params.uid}, (err) =>{
+        if(err){
+            res.send('Error interno DB');
+        } else {
+            res.redirect('/see/uid');
+        }
+    })
+})
 
 module.exports=app;

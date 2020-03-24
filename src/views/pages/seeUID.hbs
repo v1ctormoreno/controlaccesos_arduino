@@ -1,19 +1,24 @@
+<div class="container-md">
+
 <table class="table">
-    <thead>
+    <thead class="thead-dark">
         <tr>
             <th scope="col">UID</th>
             <th scope="col">Nombre</th>
             <th scope="col">Apellido</th>
+            <th scope="col">Acciones</th>
+
         </tr>
     </thead>
     <tbody>
-     {{#each uids}}  
-     {{this}} 
+        {{#each uids}}
         <tr>
-            <th scope="row">UID</th>
+            <th scope="row">{{this.uid}}</th>
             <td>{{name}}</td>
             <td>{{this.lastname}}</td>
+            <td><a href="/delete/{{this.uid}}">Eliminar</a></td>
         </tr>
         {{/each}}
     </tbody>
 </table>
+</div>

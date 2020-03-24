@@ -1,0 +1,28 @@
+{
+  "name": "controlaccesos_arduino",
+  "version": "1.0.0",
+  "description": "Control de accesos usando un lector RFID, NodeJS y MongoDB.",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "express-handlebars": "^3.1.0",
+    "mongoose": "^5.9.6",
+    "nodemon": "^2.0.2",
+    "path": "^0.12.7",
+    "serialport": "^8.0.7"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/v1ctormoreno/controlaccesos_arduino.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/v1ctormoreno/controlaccesos_arduino/issues"
+  },
+  "homepage": "https://github.com/v1ctormoreno/controlaccesos_arduino#readme"
+}
