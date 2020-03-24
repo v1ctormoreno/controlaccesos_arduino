@@ -2,7 +2,7 @@
 #RFID Sensor
 | *#* | *RFID SENSOR* |  *ARDUINO*  |
 |:-:|:-----------:|:---------:|
-| *1* |     3.3V    |    3.3V   |
+| **1** |     3.3V    |    3.3V   |
 | *2* |     RST     | Digital 9 |
 | *3* |     GND     |    GND    |
 | *4* |      RQ     |     -     |
