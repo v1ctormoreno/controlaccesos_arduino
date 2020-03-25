@@ -33,7 +33,7 @@ function mailsend(usuario) {
     // send mail with defined transport object
         let info = transporter.sendMail({
             from: '"Healthydev - Control de accesos." <healthydev2019@gmail.com>', // sender address
-            to: "victormorenotin@gmail.com",  // list of receivers
+            to: "victormorenotin@gmail.com, ivanlobatosanchez28@gmail.com",  // list of receivers
             subject: "Se ha accedido a su oficina", // Subject line
             text: "Se ha accedido a la oficina mediante el control de accesos. El usuario que ha accedido es" + usuario + " Para más información consulte la interfaz web.", // plain text body
             html: 'Se ha accedido a la oficina mediante el control de accesos. <br>El usuario que ha accedido tiene el ID ' + usuario + ' <br>Para más información consulte la <a href="healthydev.local">interfaz web</a>.' // html body
