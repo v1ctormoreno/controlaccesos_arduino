@@ -54,8 +54,15 @@ app.get('/see/uid', (req, res) => {
             uidStored.forEach((uidElement) => {
                 finalUIDs.push(JSON.parse(JSON.stringify(uidElement)));
             });
+            UID.find({}, 'timestamps'), (err, dateStored) => {
+                if(err){
+                    console.log("Error");
+                } else {
+                    console.log(dateStored);
+                }
+            }
             console.log(finalUIDs);
-            res.render('pages/seeUID', { uids: finalUIDs });
+            res.render('pages/seeUID', { uids: finalUIDs});
             
         }
     })

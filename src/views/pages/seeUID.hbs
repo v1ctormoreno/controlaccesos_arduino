@@ -1,11 +1,12 @@
 <div style="margin-top: 25px;" class="container-md">
 
-<table class="table">
+<table class="table animated jackInTheBox">
     <thead class="thead-dark">
         <tr>
             <th scope="col">UID</th>
             <th scope="col">Nombre</th>
             <th scope="col">Apellido</th>
+            <th scope="col">Fecha de Creación</th>
             <th scope="col">Acciones</th>
 
         </tr>
@@ -13,9 +14,10 @@
     <tbody>
         {{#each uids}}
         <tr>
-            <th scope="row">{{this.uid}}</th>
+            <th class=""scope="row">{{this.uid}}</th>
             <td>{{name}}</td>
             <td>{{this.lastname}}</td>
+            <td>{{this.timestamps}}</td>
             <td><a href="/delete/{{this.uid}}">Eliminar</a></td>
         </tr>
         {{/each}}

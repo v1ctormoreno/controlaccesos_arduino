@@ -9,7 +9,12 @@ const UIDSchema=Schema({
         required: true
     },
     name: String,
-    lastname: String
+    lastname: String,
+    timestamps: {
+        type: Date,
+        default: Date.now
+    }
+    
 
 });
 module.exports=mongoose.model('UID2', UIDSchema);

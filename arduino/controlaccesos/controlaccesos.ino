@@ -4,6 +4,32 @@
 #define RST_PIN 9 // Configurable, see typical pin layout above
 #define SS_PIN 10 // Configurable, see typical pin layout above
 
+int speakerPin = 7;
+int length = 15; // el numero de las notas
+char notes[] = "ccggaagffeeddc "; 
+int beats[] = { 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 2, 4 };
+int tempo = 300;
+void playTone(int tone, int duration) {
+  for (long i = 0; i < duration * 1000L; i += tone * 2) {
+    digitalWrite(speakerPin, HIGH);
+    delayMicroseconds(tone);
+    digitalWrite(speakerPin, LOW);
+    delayMicroseconds(tone);
+  }
+}
+
+void playNote(char note, int duration) {
+  char names[] = { 'c', 'd', 'e', 'f', 'g', 'a', 'b', 'C' };
+  int tones[] = { 1915, 1700, 1519, 1432, 1275, 1136, 1014, 956 };
+
+  // toca el tono correspondiente al nombre de la nota
+  for (int i = 0; i < 8; i++) {
+    if (names[i] == note) {
+      playTone(tones[i], duration);
+    }
+  }
+}
+
 int incomingByte = 0;
 bool comprobar_tarjeta;
 
@@ -13,6 +39,7 @@ MFRC522::MIFARE_Key key;
 
 void setup()
 {
+  pinMode(speakerPin, OUTPUT);
   pinMode(2, OUTPUT);
   pinMode(3, OUTPUT);
   comprobar_tarjeta=true;
@@ -63,10 +90,14 @@ void loop()
     // say what you got:
     if(incomingByte){
       digitalWrite(2, HIGH);
+      tone(6, 1000, 500);
+      delay(750);
+      tone(6, 1000, 500);      
       delay(3000);
       digitalWrite(2, LOW);
     } else {
       digitalWrite(3, HIGH);
+      tone(6, 100, 3000);
       delay(3000);
       digitalWrite(3, LOW);
     }
