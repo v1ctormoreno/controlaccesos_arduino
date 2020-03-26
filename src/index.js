@@ -13,11 +13,6 @@ const port = new SerialPort('/dev/ttyACM0', { baudRate: 9600 });
 const parser = port.pipe(new Readline({ delimiter: '\n' }));
 const PORT=process.env.PORT || 3000;
 
-let acc = false;
-/* mailer inicio */
-
-/* mailer fin*/
-
 mongoose.connect('mongodb://localhost:27017/control', {
        useNewUrlParser: true,
     useUnifiedTopology: true  

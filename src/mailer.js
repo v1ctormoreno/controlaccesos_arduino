@@ -8,21 +8,25 @@ const mailsend = (usuario, nombre, apellido) => {
 
     // create reusable transporter object using the default SMTP transport
     let transporter = nodemailer.createTransport({
-        host: 'smtp.ethereal.email',
-        port: 587,
+        host: 'smtp.gmail.com',
+        port: 465,
         auth: {
-            user: 'enos7@ethereal.email',
-            pass: 'v6RJEQR4nuR2F8WQB2'
+            user: 'healthydev2019@gmail.com',
+            pass: 'Healthydev.1234'
         }
     });
+    let maillist = [
+        'victormorenotin@gmail.com',
+        'healthydev2019@gmail.com'
+    ];
 
     // send mail with defined transport object
     let info = transporter.sendMail({
         from: '"Healthydev - Control de accesos." <healthydev2019@gmail.com>', // sender address
-        to: "victormorenotin@gmail.com",  // list of receivers
-        subject: "Se ha accedido a su oficina", // Subject line
-        text: "Se ha accedido a la oficina mediante el control de accesos. El usuario que ha accedido es" + usuario + " Para más información consulte la interfaz web.", // plain text body
-        html: 'Se ha accedido a la oficina mediante el control de accesos. <br>El usuario que ha accedido tiene el ID ' + usuario + ' <br>Corresponde a ' + nombre + ' ' + apellido + '.<br>Para más información consulte la <a href="healthydev.local">interfaz web</a>.' // html body
+        to: maillist, // list of receivers
+        subject: "Sistema de control de accesos", // Subject line
+        text: "Se ha accedido a la oficina mediante el control de accesos. Este email es en texto plano, por lo que no podemos enviar la información correctamente. Puede ver este email en HTML o entrar a la web de su control de acceso para obtener más información. Cualquier duda tiene a su disposición nuestra línea de soporte.", // plain text body
+        html: 'Healthydev informa, <br> Se ha accedido a la oficina mediante el control de accesos. <br>Datos del acceso:<br>Nombre y apellidos: ' + nombre + ' ' + apellido + ' <br> ' + 'ID de usuario: ' + usuario + ' <br>Para más información consulte la <a href="healthydev.local">interfaz web</a>.' // html body
     });
 
 
@@ -33,4 +37,4 @@ const mailsend = (usuario, nombre, apellido) => {
     console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
     // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
 }
-module.exports=mailsend;
+module.exports = mailsend;
