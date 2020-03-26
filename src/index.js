@@ -3,7 +3,7 @@ const UID = require('./models/UID');
 const path = require('path');
 const nodemailer = require("nodemailer");
 const mailsend=require('./mailer');
-
+const Entrance=require('./models/Entrance');
 
 
 const mongoose=require('mongoose');
@@ -38,10 +38,10 @@ parser.on('data', data => {
                 console.log("El UID " + parseInt(data) + " no existe.");
                 port.write('0');
                 mailsend(parseInt(data));
-
             } else {
                 console.log("El UID " + uidStored.uid + " existe. Y se llama " + uidStored.name + ' ' + uidStored.lastname + ".");
                 port.write('1');
+                Entrance.create({uid: uidStored.uid});
                 mailsend(parseInt(data), uidStored.name, uidStored.lastname);
             }
         }
