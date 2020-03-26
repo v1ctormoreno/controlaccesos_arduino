@@ -1,23 +1,23 @@
 <div style="margin-top: 25px;" class="container-md">
 
-<table class="table animated jackInTheBox">
-    <thead class="thead-dark">
-        <tr>
-            <th scope="col">UID</th>
-            <th scope="col">Fecha de Entrada</th>
-<!--             <th scope="col">Apellido</th>
+    <table class="table animated jackInTheBox">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">UID</th>
+                <th scope="col">Fecha de Entrada</th>
+                <!--             <th scope="col">Apellido</th>
             <th scope="col">Fecha de Creación</th>
             <th scope="col">Acciones</th> -->
 
-        </tr>
-    </thead>
-    <tbody>
-        {{#each entrance}}
-        <tr>
-            <th class=""scope="row">{{entrance.uid}}</th>
-            <td>{{entrance.timestamps}}</td>
-        </tr>
-        {{/each}}
-    </tbody>
-</table>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each entrance}}
+            <tr>
+                <th class="" scope="row">{{this.uid}}</th>
+                <td>{{timeago timestamps}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
 </div>

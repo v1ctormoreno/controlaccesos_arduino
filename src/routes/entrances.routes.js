@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const Entrance=require('../models/Entrance');
+const UID=require('../models/UID');
 
 router.get('/see/entrances', (req,res) => {
     Entrance.find({}, (err, entranceStored) => {
@@ -11,7 +12,7 @@ router.get('/see/entrances', (req,res) => {
             entranceStored.forEach((entranceElement) => {
                 finalEntrances.push(JSON.parse(JSON.stringify(entranceElement)));
             });
-            console.log(finalEntrances);  
+            console.log(finalEntrances.uid);  
             res.render('../views/pages/entrances', {entrance: finalEntrances});
         }
     })

@@ -15,13 +15,14 @@ const PORT=process.env.PORT || 3000;
 
 mongoose.connect('mongodb://localhost:27017/control', {
        useNewUrlParser: true,
-    useUnifiedTopology: true  
+    useUnifiedTopology: true,
+    useCreateIndex: true  
 }, (err,res)=>{
     if(err) throw err;
     else{
         console.log("Connection to BBDD works");
         app.listen(PORT, ()=>{
-            console.log("Webserver is running");
+            console.log("Webserver is running at port " + PORT);
             
         });
     }
