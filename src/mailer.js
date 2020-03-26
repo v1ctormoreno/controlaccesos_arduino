@@ -1,7 +1,7 @@
 const express = require('express');
 const nodemailer = require("nodemailer");
 let usuario;
-const mailsend = (usuario) => {
+const mailsend = (usuario, nombre, apellido) => {
     // Generate test SMTP service account from ethereal.email
     // Only needed if you don't have a real mail account for testing
     /*    let testAccount = await nodemailer.createTestAccount();*/
@@ -22,7 +22,7 @@ const mailsend = (usuario) => {
         to: "victormorenotin@gmail.com",  // list of receivers
         subject: "Se ha accedido a su oficina", // Subject line
         text: "Se ha accedido a la oficina mediante el control de accesos. El usuario que ha accedido es" + usuario + " Para más información consulte la interfaz web.", // plain text body
-        html: 'Se ha accedido a la oficina mediante el control de accesos. <br>El usuario que ha accedido tiene el ID ' + usuario + ' <br>Para más información consulte la <a href="healthydev.local">interfaz web</a>.' // html body
+        html: 'Se ha accedido a la oficina mediante el control de accesos. <br>El usuario que ha accedido tiene el ID ' + usuario + ' <br>Corresponde a' + nombre + '' + apellido + '<br>Para más información consulte la <a href="healthydev.local">interfaz web</a>.' // html body
     });
 
 

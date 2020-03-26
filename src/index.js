@@ -47,9 +47,9 @@ parser.on('data', data => {
                 mailsend(parseInt(data));
 
             } else {
-                console.log("El UID " + parseInt(data) + " existe.");
+                console.log("El UID " + uidStored.uid + " existe. Y se llama " + uidStored.name + ' ' + uidStored.lastname + ".");
                 port.write('1');
-                mailsend(parseInt(data));
+                mailsend(parseInt(data), uidStored.name, uidStored.lastname);
             }
         }
     });
