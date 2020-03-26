@@ -3,7 +3,9 @@
     <table class="table animated jackInTheBox">
         <thead class="thead-dark">
             <tr>
-                <th scope="col">UID</th>
+                 <th scope="col">Nombre</th>
+                <th scope="col">Apellido</th>
+                <th style="text-align: center"scope="col">UID</th>
                 <th scope="col">Fecha de Entrada</th>
                 <!--             <th scope="col">Apellido</th>
             <th scope="col">Fecha de Creación</th>
@@ -14,8 +16,10 @@
         <tbody>
             {{#each entrance}}
             <tr>
-                <th class="" scope="row">{{this.uid}}</th>
-                <td>{{timeago timestamps}}</td>
+                <th></th>
+                <th></th>
+                <th style="text-align: center" class="" scope="row">{{this.uid}}</th>
+                <td>{{momenthelper timestamps}}</td>
             </tr>
             {{/each}}
         </tbody>

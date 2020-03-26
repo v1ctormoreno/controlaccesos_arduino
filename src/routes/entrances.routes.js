@@ -1,9 +1,9 @@
 const router = require('express').Router();
 const Entrance=require('../models/Entrance');
 const UID=require('../models/UID');
-
+let ascsort = {timestamps: 1};
 router.get('/see/entrances', (req,res) => {
-    Entrance.find({}, (err, entranceStored) => {
+    Entrance.find({},  (err, entranceStored) => {
         if(err){
             res.send('Errror DB');
         } else {

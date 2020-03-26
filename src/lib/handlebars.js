@@ -2,7 +2,7 @@
 const moment = require('moment');
 const helpers = {};
 
-helpers.timeago = (savedTimestamp) => {    
+helpers.momenthelper = (savedTimestamp) => {    
     return moment(savedTimestamp).format('DD/MM/YYYY h:mm:ss a');
 };
 
