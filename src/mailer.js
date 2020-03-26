@@ -1,19 +1,18 @@
 const express = require('express');
 const nodemailer = require("nodemailer");
 let usuario;
-exports.mailer = function mailsend(usuario) {
+const mailsend = (usuario) => {
     // Generate test SMTP service account from ethereal.email
     // Only needed if you don't have a real mail account for testing
     /*    let testAccount = await nodemailer.createTestAccount();*/
 
     // create reusable transporter object using the default SMTP transport
     let transporter = nodemailer.createTransport({
-        host: "smtp.gmail.com",
-        port: 465,
-        secure: true, // true for 465, false for other ports
+        host: 'smtp.ethereal.email',
+        port: 587,
         auth: {
-            user: 'healthydev2019@gmail.com',
-            pass: 'Healthydev.1234'
+            user: 'enos7@ethereal.email',
+            pass: 'v6RJEQR4nuR2F8WQB2'
         }
     });
 
@@ -34,3 +33,4 @@ exports.mailer = function mailsend(usuario) {
     console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
     // Preview URL: https://ethereal.email/message/WaQKMgKddxQDoou...
 }
+module.exports=mailsend;
