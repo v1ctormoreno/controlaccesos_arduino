@@ -27,8 +27,6 @@ mongoose.connect('mongodb://localhost:27017/control', {
     }
 });
 
-var autorizados = [15683, 214];
-//create a server object:
 parser.on('data', data => {
     console.log(data);
     uidlog = parseInt(data);

@@ -11,7 +11,9 @@
     "nodemailer": "^6.4.6",
     "nodemon": "^2.0.2",
     "path": "^0.12.7",
-    "serialport": "^8.0.7"
+    "serialport": "^8.0.7",
+    "timeago": "^1.6.7",
+    "timeago.js": "^4.0.2"
   },
   "devDependencies": {},
   "scripts": {

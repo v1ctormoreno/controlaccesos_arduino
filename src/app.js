@@ -8,25 +8,13 @@ const app=express();
 app.use(express.urlencoded({extended: true}));
 
 
-function timeConverter(UNIX_timestamp){
-    var a = new Date(UNIX_timestamp * 1000);
-    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-    var year = a.getFullYear();
-    var month = months[a.getMonth()];
-    var date = a.getDate();
-    var hour = a.getHours();
-    var min = a.getMinutes();
-    var sec = a.getSeconds();
-    var time = date + ' ' + month + ' ' + year + ' ' + hour + ':' + min + ':' + sec ;
-    return time;
-  }
-
 app.set('views', path.join(__dirname, 'views'));
 app.engine('.hbs', exphbs({
     defaultLayout: 'main',
     layoutsDir: path.join(app.get('views'), 'layouts'), //path.join junta directorios en diferentes sistemas
     partialsDir: path.join(app.get('views'), 'partials'),
     extname: '.hbs',
+    helpers: require('./lib/handlebars')
 }));
 app.set('view engine', '.hbs'); 
 app.get('/', (req, res)=>{
@@ -57,6 +45,8 @@ app.get('/get/uid/:uid', (req, res)=>{
         } 
     })
 });
+//Helper timestamp parser
+
 app.get('/see/uid', (req, res) => {
     UID.find({}, (err, uidStored) => {
         if(err){
