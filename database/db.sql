@@ -1,4 +1,6 @@
+CREATE USER 'controlaccessos'@'localhost' IDENTIFIED BY 'controlaccesos';
 CREATE DATABASE controlacc;
+GRANT ALL PRIVILEGES ON controlacc.* TO 'controlaccessos'@'localhost';
 USE controlacc;
 CREATE TABLE users(
     user_id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY ,
