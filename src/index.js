@@ -22,7 +22,7 @@ mongoose.connect('mongodb://localhost:27017/control', {
     else{
         console.log("Connection to BBDD works");
         app.listen(PORT, ()=>{
-            console.log("Webserver is running at port " + PORT);
+            console.log(`Web server running on port ${PORT}`);
             
         });
     }
