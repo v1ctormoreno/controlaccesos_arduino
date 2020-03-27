@@ -3,7 +3,7 @@ const path=require('path');
 const exphbs=require('express-handlebars');
 const app=express();
 
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({extended: false}));
 
 
 app.set('views', path.join(__dirname, 'views'));

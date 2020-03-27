@@ -13,21 +13,13 @@ const port = new SerialPort('/dev/ttyACM0', { baudRate: 9600 });
 const parser = port.pipe(new Readline({ delimiter: '\n' }));
 const PORT=process.env.PORT || 3000;
 
-mongoose.connect('mongodb://localhost:27017/control', {
-       useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true  
-}, (err,res)=>{
-    if(err) throw err;
-    else{
-        console.log("Connection to BBDD works");
-        app.listen(PORT, ()=>{
-            console.log(`Web server running on port ${PORT}`);
-            
-        });
-    }
+mongoose.connect('mongodb://localhost/dbmanuela')
+  .then(db => console.log('db connected'))
+  .catch(err => console.log(err));
+app.listen(PORT, ()=>{
+    console.log(`Web server running on port ${PORT}`);
+    
 });
-
 parser.on('data', data => {
     console.log(data);
     uidlog = parseInt(data);

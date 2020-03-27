@@ -17,4 +17,4 @@ const UIDSchema=Schema({
     
 
 });
-module.exports=mongoose.model('UID2', UIDSchema);
+module.exports=mongoose.model('users', UIDSchema);
