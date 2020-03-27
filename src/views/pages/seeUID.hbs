@@ -1,26 +1,28 @@
 <div style="margin-top: 25px;" class="container-md">
 
-<table class="table animated jackInTheBox">
-    <thead class="thead-dark">
-        <tr>
-            <th scope="col">UID</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Apellido</th>
-            <th scope="col">Fecha de Creación</th>
-            <th scope="col">Acciones</th>
+    <div style="overflow-x:auto;">
+        <table class="table animated jackInTheBox">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">UID</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
+                    <th scope="col">Fecha de Creación</th>
+                    <th scope="col">Acciones</th>
 
-        </tr>
-    </thead>
-    <tbody>
-        {{#each uids}}
-        <tr>
-            <th class=""scope="row">{{this.uid}}</th>
-            <td>{{this.name}}</td>
-            <td>{{this.lastname}}</td>
-            <td>{{momenthelper this.timestamps}}</td>
-            <td><a href="/delete/{{this.uid}}">Eliminar</a></td>
-        </tr>
-        {{/each}}
-    </tbody>
-</table>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each uids}}
+                <tr>
+                    <th class="" scope="row">{{this.uid}}</th>
+                    <td>{{this.name}}</td>
+                    <td>{{this.lastname}}</td>
+                    <td>{{momenthelper this.creation}}</td>
+                    <td><a href="/delete/{{this.uid}}">Eliminar</a></td>
+                </tr>
+                {{/each}}
+            </tbody>
+        </table>
+    </div>
 </div>

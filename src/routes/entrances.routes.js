@@ -1,26 +1,26 @@
 const router = require('express').Router();
 const Entrance=require('../models/Entrance');
 const UID=require('../models/UID');
+const pool=require('../database');
 router.get('/see/entrances', (req,res) => {
-    Entrance.find({}, async (err, entranceStored) => {
+    console.log(req.query);
+    let extra_query;
+    let filter_desc=false;
+    if(!req.query.filter){
+        extra_query='';
+    }else{
+        extra_query=`ORDER BY entrance_id ${req.query.filter}`;
+        if(req.query.filter==='DESC'){
+            filter_desc=true;
+        }
+    }
+    pool.query(`SELECT * FROM entrances JOIN users ${extra_query}`, async (err, entranceStored) => {
         if(err){
             res.send('Errror DB');
         } else {
             //console.log(entranceStored);
-            let finalEntrances = [];
-            await entranceStored.forEach(async(entranceElement) => {
-                const result = await UID.findOne({uid: entranceElement.uid})
-                    .then(userStored => {
-                        if(userStored){
-                            console.log(userStored);
-                            entranceElement.name = userStored.name;
-                            entranceElement.lastname = userStored.lastname;
-                            finalEntrances.push(JSON.parse(JSON.stringify(entranceElement)));
-                        }
-                    })
-            });
-            console.log(finalEntrances);
-            res.render('../views/pages/entrances', {entrance: finalEntrances});
+            console.log(entranceStored);
+            res.render('../views/pages/entrances', {entrance: entranceStored, filter: req.query.filter, filter_desc});
         }
     })
 }) 

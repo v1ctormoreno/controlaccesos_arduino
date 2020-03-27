@@ -1,39 +1,47 @@
 const router = require('express').Router();
-const UID=require('../models/UID');
+const UID = require('../models/UID');
+const pool = require('../database');
 
+router.get('/', (req, res) => {
+    pool.query(`SELECT * FROM entrances JOIN users WHERE entrance_id=(SELECT MAX(entrance_id) FROM entrances)`, (err, entranceStored) => {
+        if (err) {
+            res.send(`Error Interno DB`);
+        } else {
+            res.render('pages/index', {entranceStored: entranceStored[0]});
+        }
+    })
 
-router.get('/', (req, res)=>{
-    res.render('pages/index');
 });
-router.get('/new/uid', (req, res)=>{
+router.get('/new/uid', (req, res) => {
     res.render('pages/newUID');
 });
-router.post('/new/uid', (req, res)=>{
-    UID.create(req.body, (err, uidStored)=>{
-        if(err){
-            res.send('Error: '+err);
-        } else{
+router.post('/new/uid', (req, res) => {
+    pool.query(`INSERT INTO users SET ?`, [req.body], (err) => {
+        if (err) {
+            res.send('Error interno DB. Consulta la consola.');
+            console.log(err);
+        } else {
             res.redirect('/see/uid');
         }
-    });
+    })
 });
-router.get('/get/uid/:uid', (req, res)=>{
-    UID.findOne({uid: req.params.uid}, (err, uidStored)=>{
-        if(err){
-            res.send('Error:' +err);
-        } else{
-            if(!uidStored){
+router.get('/get/uid/:uid', (req, res) => {
+    pool.query(`SELECT * FROM users WHERE uid = ?`, [req.params.uid], (err, uidStored) => {
+        if (err) {
+            res.send('Error:' + err);
+        } else {
+            if (!uidStored) {
                 res.send("Este ID no existe");
             } else {
                 res.send(uidStored);
             }
-        } 
+        }
     })
 });
 
 router.get('/see/uid', (req, res) => {
-    UID.find({}, (err, uidStored) => {
-        if(err){
+    pool.query(`SELECT * FROM users`, (err, uidStored) => {
+        if (err) {
             res.send('Error interno DB');
         } else {
             console.log(uidStored);
@@ -41,23 +49,18 @@ router.get('/see/uid', (req, res) => {
             uidStored.forEach((uidElement) => {
                 finalUIDs.push(JSON.parse(JSON.stringify(uidElement)));
             });
-            UID.find({}, 'timestamps'), (err, dateStored) => {
-                if(err){
-                    console.log("Error");
-                } else {
-                    console.log(dateStored);
-                }
-            }
             console.log(finalUIDs);
-            res.render('pages/seeUID', {uids: finalUIDs});
-            
+            res.render('pages/seeUID', {
+                uids: uidStored
+            });
+
         }
-    })
+    });
 });
 
-router.get('/delete/:uid', (req, res)=> {
-    UID.deleteOne({uid: req.params.uid}, (err) =>{
-        if(err){
+router.get('/delete/:uid', (req, res) => {
+    pool.query(`DELETE FROM users WHERE uid = ?`, [req.params.uid], (err) => {
+        if (err) {
             res.send('Error interno DB');
         } else {
             res.redirect('/see/uid');

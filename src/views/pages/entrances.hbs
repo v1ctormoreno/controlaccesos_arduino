@@ -1,11 +1,25 @@
 <div style="margin-top: 25px;" class="container-md">
 
-    <table class="table animated jackInTheBox">
+    <form action="/see/entrances" METHOD="GET" class="form-group">
+        <div class="row">
+            <div class="col">
+                <input type="submit" class="btn btn-primary" value="Filtrar">
+            </div>
+            <div class="col">
+                <select class="form-control form-control-lg" name="filter">
+                    <option value="ASC">Ascendente</option>
+                    <option {{#if filter_desc }} selected {{/if}}value="DESC">Descendiente</option>
+                </select>
+            </div>
+        </div>
+    </form>
+    
+    <table class="table animated jackInTheBox" style="overflow-x:auto;">
         <thead class="thead-dark">
             <tr>
-                 <th scope="col">Nombre</th>
+                <th scope="col">Nombre</th>
                 <th scope="col">Apellido</th>
-                <th style="text-align: center"scope="col">UID</th>
+                <th style="text-align: center" scope="col">UID</th>
                 <th scope="col">Fecha de Entrada</th>
                 <!--             <th scope="col">Apellido</th>
             <th scope="col">Fecha de Creación</th>
@@ -19,7 +33,7 @@
                 <th>{{this.name}}</th>
                 <th>{{this.lastname}}</th>
                 <th style="text-align: center" class="" scope="row">{{this.uid}}</th>
-                <td>{{momenthelper timestamps}}</td>
+                <td>{{momenthelper this.entrance}}</td>
             </tr>
             {{/each}}
         </tbody>
