@@ -11,7 +11,7 @@ const mailsend = (usuario, nombre, apellido) => {
         port: 465,
         auth: {
             user: 'healthydev2019@gmail.com',
-            pass: 'Healthydev.1234'
+            pass: ''
         }
     });
     let maillist = [
