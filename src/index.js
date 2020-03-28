@@ -85,7 +85,7 @@ parser.on('data', data => {
                             if(err){
                                 console.log(err);
                             } else{
-                                console.log(`Lo he metido en la base de datos, cap de suro.`)
+                                console.log(`${uid} ha sido insertado en la base de datos.`);
                             }
                         });
                         mailsend(uid, name, lastname);

@@ -16,7 +16,8 @@ const mailsend = (usuario, nombre, apellido) => {
     });
     let maillist = [
         'victormorenotin@gmail.com',
-        'healthydev2019@gmail.com'
+        'healthydev2019@gmail.com',
+        'daviddionissoler@gmail.com'
     ];
 
     // send mail with defined transport object
